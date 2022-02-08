@@ -1,9 +1,16 @@
 import React from 'react';
 
-function Routes() {
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Login from './pages/Login/index';
+
+function Router() {
   return (
-    <h1>Fernando</h1>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Login />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
-export default Routes;
+export default Router;
