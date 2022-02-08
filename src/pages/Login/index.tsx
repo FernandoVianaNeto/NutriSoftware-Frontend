@@ -14,16 +14,21 @@ import { Button } from '../../components/Button';
 import isEmailValid from '../../utils/isEmailValid';
 import formatPhone from '../../utils/formatPhone';
 
+import { useAuth } from '../../hooks/useAuth';
+
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [registerPassword, setRegisterPassword] = useState('');
   const [registerEmail, setRegisterEmail] = useState('');
-
   const [buttonDisabled, setButtonDisabled] = useState(true);
+  const [buttonRegisterDisabled, setButtonRegisterDisabled] = useState(true);
+
+  const {
+    handleLogin, unAuth, registedUser, handleRegisterUser,
+  } = useAuth();
 
   useEffect(() => {
     if (isEmailValid(email) && password !== '') {
@@ -35,11 +40,11 @@ export default function Login() {
 
   useEffect(() => {
     if (isEmailValid(registerEmail) && registerPassword !== '' && name !== '' && phone !== '') {
-      setButtonDisabled(false);
+      setButtonRegisterDisabled(false);
     } else {
-      setButtonDisabled(true);
+      setButtonRegisterDisabled(true);
     }
-  }, [email, password, name, phone]);
+  }, [registerEmail, registerPassword, name, phone]);
 
   return (
     <Container>
@@ -64,7 +69,10 @@ export default function Login() {
               onChange={(event) => setPassword(event.target.value)}
             />
           </InputContainer>
-          <Button disabled={buttonDisabled} type="button">
+          {
+            unAuth && <small>Usuário e/ou senha inválidos</small>
+          }
+          <Button disabled={buttonDisabled} type="button" onClick={() => handleLogin({ email, password })}>
             Login
             <FiLogIn />
           </Button>
@@ -116,13 +124,21 @@ export default function Login() {
                   onChange={(event) => setRegisterPassword(event.target.value)}
                 />
               </InputContainer>
-              <Button type="button" disabled={buttonDisabled}>
+              {
+                registedUser && <small>Usuário já cadastrado</small>
+              }
+              <Button
+                type="button"
+                disabled={buttonRegisterDisabled}
+                onClick={() => handleRegisterUser({
+                  email: registerEmail, password: registerPassword, phone, name,
+                })}
+              >
                 Cadastrar
               </Button>
             </Form>
           </FormContainer>
         </SectionContent>
-
       </Section>
     </Container>
   );
