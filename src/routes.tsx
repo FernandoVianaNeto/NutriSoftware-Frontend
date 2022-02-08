@@ -1,9 +1,9 @@
 import React from 'react';
 
-function App() {
+function Routes() {
   return (
     <h1>Fernando</h1>
   );
 }
 
-export default App;
+export default Routes;
