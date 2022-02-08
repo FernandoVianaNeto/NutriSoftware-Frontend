@@ -1,14 +1,14 @@
 import React from 'react';
 import { Container } from './styles';
 
-// type UserProps = {
-//   children: any
-// }
+import { Base } from '../../templates/Base';
 
 export function User() {
   return (
     <Container>
-      <h1>user page</h1>
+      <Base meals createmeal={false}>
+        <h1>Fernando</h1>
+      </Base>
     </Container>
   );
 }
