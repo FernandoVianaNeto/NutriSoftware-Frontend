@@ -5,11 +5,6 @@ import {
 
 import { ButtonLink } from '../../components/ButtonLink';
 
-// type BaseProps = {
-//   // eslint-disable-next-line react/require-default-props
-//   children?: any
-// }
-
 export function Base({ children }: any) {
   return (
     <Container>

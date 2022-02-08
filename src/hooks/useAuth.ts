@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import api from '../api/api';
+import urlConfig from '../urlConfig.json';
 
 interface AuthProps {
   email: string,
@@ -23,9 +24,9 @@ export function useAuth() {
     })
       .then(async (response) => {
         setUnAuth(false);
-        // const { user } = response.data;
+        const { user } = response.data;
         localStorage.setItem('token', JSON.stringify(response.data.token));
-        // window.location.href = ""
+        window.location.href = `${urlConfig.frontendURL}/user/${user.id}`;
       })
       .catch(() => {
         setUnAuth(true);
@@ -40,8 +41,8 @@ export function useAuth() {
     })
       .then(async (response) => {
         setRegistedUser(false);
-        console.log(response.data);
-        // window.location.href = ""
+        const { user } = response.data;
+        window.location.href = `${urlConfig.frontendURL}/user/${user.id}`;
       })
       .catch(() => {
         setRegistedUser(true);
