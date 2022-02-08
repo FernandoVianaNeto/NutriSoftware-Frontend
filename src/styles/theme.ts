@@ -9,6 +9,7 @@ export default {
     secondaryColor: '#136F63',
     thirdColor: '#637074',
     fourthColor: '#FAFFFD',
+    fifthColor: '#60A561',
     contrastColor: '#00A5E0',
     contrastColorDarker: '#1481BA',
   },
