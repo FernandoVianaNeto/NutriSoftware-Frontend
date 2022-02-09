@@ -1,6 +1,9 @@
+/* eslint-disable no-alert */
 import React from 'react';
 import { AiFillDelete, AiFillEdit } from 'react-icons/ai';
 import { Container } from './styles';
+
+import api from '../../api/api';
 
 interface MealCardProps {
   vegetablesamount: number,
@@ -18,7 +21,14 @@ export function MealCard({
   vegetablesamount, proteinsamount, carbohydratesamount,
   carbohydratefood, proteinfood, vegetablefood, meal, date, id,
 }: MealCardProps) {
-  console.log(id);
+  function handleDeleteMeal() {
+    if ((window.confirm('Are you sure you want to delete this meal?'))) {
+      api.delete(`/deletemeal/${id}`)
+        .then(() => {
+          window.location.reload();
+        });
+    }
+  }
 
   return (
     <Container>
@@ -43,7 +53,7 @@ export function MealCard({
               g
             </td>
             <td className="options">
-              <button type="button" className="delete-button">
+              <button type="button" className="delete-button" onClick={() => handleDeleteMeal()}>
                 {' '}
                 <AiFillDelete />
               </button>
