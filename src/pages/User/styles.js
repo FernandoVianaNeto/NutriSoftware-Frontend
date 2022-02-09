@@ -43,6 +43,25 @@ export const MealsContainer = styled.div`
         font-size: 20px;
       }
     }
+
+    .no-meal {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      a {
+        background-color: ${theme.colors.fifthColor};
+        color: ${theme.colors.fourthColor};
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        padding: 10px 20px;
+        border-top-right-radius: 20px;
+        border-bottom-left-radius: 20px;
+        box-shadow: 0.3em 0.5em 0.5em ${theme.colors.fifthColor}
+      }
+    }
   `}
 `;
 

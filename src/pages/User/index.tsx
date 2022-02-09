@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 import { BsFillGearFill, BsArrowDownShort, BsArrowUpShort } from 'react-icons/bs';
+import { AiOutlinePlus } from 'react-icons/ai';
 import { HiOutlineEmojiSad } from 'react-icons/hi';
 import {
   Container, SectionContent, MealsContainer, Filters, FiltersButtonContainer,
@@ -148,6 +149,18 @@ export function User() {
             </FiltersButtonContainer>
           </Filters>
           <MealsContainer>
+            {
+              mealsData.length === 0 && (
+              <strong className="no-meal">
+                Cadastre uma nova refeição para mostrá-la aqui
+                {' '}
+                <a href={`${urlConfig.frontendURL}/criarrefeicao/${id}`}>
+                  <AiOutlinePlus />
+                  Criar refeição
+                </a>
+              </strong>
+              )
+            }
             {
               filtered.length === 0 && isFiltered === false
               && mealsData.map((meal: MealProps) => (
