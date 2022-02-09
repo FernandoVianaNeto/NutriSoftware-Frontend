@@ -16,7 +16,6 @@ export const Aside = styled.aside`
 
     background-color: ${theme.colors.fifthColor};
     flex: 1;
-    height: 100vh;
     z-index: 100;
     padding: 0px 30px;
 
@@ -36,10 +35,9 @@ export const Section = styled.section`
   ${() => css`
     flex: 5;
     overflow-y: auto;
+    max-height: 100vh;
     background-image: url('https://res.cloudinary.com/dh84pxwgu/image/upload/v1644348006/dan-gold-4_jhDO54BYg-unsplash_e7wcry.jpg');
     background-size: cover;
-
-
   `}
 `;
 
