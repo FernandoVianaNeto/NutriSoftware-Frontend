@@ -22,7 +22,7 @@ export function useAuth() {
     api.post('/auth', {
       email, password,
     })
-      .then(async (response) => {
+      .then(async (response: any) => {
         setUnAuth(false);
         const { user } = response.data;
         localStorage.setItem('token', JSON.stringify(response.data.token));
@@ -39,7 +39,7 @@ export function useAuth() {
     api.post('/createuser', {
       email, phone, password, name,
     })
-      .then(async (response) => {
+      .then(async (response: any) => {
         setRegistedUser(false);
         const { user } = response.data;
         window.location.href = `${urlConfig.frontendURL}/user/${user.id}`;
