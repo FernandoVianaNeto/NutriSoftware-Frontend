@@ -59,6 +59,10 @@ export const FiltersButtonContainer = styled.div`
       background: transparent;
       border: none;
       cursor: pointer;
+
+      .icon {
+        font-size: 20px;
+      }
     }
 
     table {
@@ -75,9 +79,6 @@ export const FiltersButtonContainer = styled.div`
       width: 50px;
 
       cursor: default;
-    }
-
-    tr {
     }
   `}
 `;

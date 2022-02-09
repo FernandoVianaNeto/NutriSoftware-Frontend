@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { BsFillGearFill } from 'react-icons/bs';
+import { BsFillGearFill, BsArrowDownShort, BsArrowUpShort } from 'react-icons/bs';
 import {
   Container, SectionContent, MealsContainer, Filters, FiltersButtonContainer,
 } from './styles';
@@ -11,6 +11,7 @@ import api from '../../api/api';
 import urlConfig from '../../urlConfig.json';
 
 import { MealCard } from '../../components/MealCard';
+import { Select } from '../../components/Select';
 
 interface MealProps {
   vegetablesamount: number,
@@ -26,6 +27,7 @@ interface MealProps {
 
 export function User() {
   const [mealsData, setMealsData] = useState([]);
+  const [recentMeals, setRecentMeals] = useState(true);
 
   const { id } = useParams();
 
@@ -57,13 +59,54 @@ export function User() {
               <table>
                 <tbody>
                   <tr>
-                    <td><button type="button">Refeição</button></td>
-                    <td><button type="button">Data</button></td>
-                    <td><button type="button">Proteína</button></td>
+                    <td>
+                      <Select>
+                        <option value="">Refeição</option>
+                        <option value="">Café da manhã</option>
+                        <option value="">Almoço</option>
+                        <option value="">Janta</option>
+                      </Select>
+                    </td>
+                    <td>
+                      {
+                        recentMeals ? <BsArrowUpShort className="icon" /> : <BsArrowDownShort className="icon" />
+                      }
+                      <button type="button" onClick={() => setRecentMeals(!recentMeals)}>
+                        Data
+                      </button>
+                    </td>
+                    <td>
+                      <Select>
+                        <option value="">Proteína</option>
+                        <option value="">Peixe</option>
+                        <option value="">Boi</option>
+                        <option value="">Porco</option>
+                        <option value="">Frango</option>
+                        <option value="">Ovo</option>
+                      </Select>
+                    </td>
                     <td><button type="button">Qntd.</button></td>
-                    <td><button type="button">Carboidrato</button></td>
+                    <td>
+                      <Select>
+                        <option value="">Carboidrato</option>
+                        <option value="">Arroz</option>
+                        <option value="">Batata</option>
+                        <option value="">Inhame</option>
+                        <option value="">Macarrão</option>
+                        <option value="">Pão</option>
+                      </Select>
+                    </td>
                     <td><button type="button">Qntd.</button></td>
-                    <td><button type="button">Vegetais</button></td>
+                    <td>
+                      <Select>
+                        <option value="">Vegetais</option>
+                        <option value="">Abobrinha</option>
+                        <option value="">Berinjela</option>
+                        <option value="">Abóbora</option>
+                        <option value="">Almeirão</option>
+                        <option value="">Tomate</option>
+                      </Select>
+                    </td>
                     <td><button type="button">Qntd.</button></td>
                     <td className="options">
                       {' '}
