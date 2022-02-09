@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 import { BsFillGearFill, BsArrowDownShort, BsArrowUpShort } from 'react-icons/bs';
+import { HiOutlineEmojiSad } from 'react-icons/hi';
 import {
   Container, SectionContent, MealsContainer, Filters, FiltersButtonContainer,
 } from './styles';
@@ -27,7 +28,10 @@ interface MealProps {
 
 export function User() {
   const [mealsData, setMealsData] = useState([]);
+
   const [recentMeals, setRecentMeals] = useState(true);
+  const [isFiltered, setIsFiltered] = useState(false);
+
   const [vegetablesFilter, setVegetablesFilter] = useState('');
   const [proteinsFilter, setProteinsFilter] = useState('');
   const [carbohydratesFilter, setCarbohydratesFilter] = useState('');
@@ -50,6 +54,14 @@ export function User() {
       });
   }, []);
 
+  useEffect(() => {
+    if (vegetablesFilter === '' && proteinsFilter === '' && carbohydratesFilter === '') {
+      setIsFiltered(false);
+    } else {
+      setIsFiltered(true);
+    }
+  }, [mealFilter, carbohydratesFilter, vegetablesFilter, proteinsFilter]);
+
   const filtered = useMemo(() => mealsData.filter((meal: MealProps) => (
     meal.carbohydratefood.toLowerCase().includes(carbohydratesFilter.toLowerCase())
     && meal.proteinfood.toLowerCase().includes(proteinsFilter.toLowerCase())
@@ -60,7 +72,6 @@ export function User() {
   return (
     <Container>
       <Base meals createmeal={false}>
-
         <SectionContent>
           <h1>Todas as Refeições</h1>
           <Filters>
@@ -140,6 +151,23 @@ export function User() {
           </Filters>
           <MealsContainer>
             {
+              filtered.length === 0 && isFiltered === false
+              && mealsData.map((meal: MealProps) => (
+                <MealCard
+                  vegetablesamount={meal.vegetablesamount}
+                  carbohydratesamount={meal.carbohydratesamount}
+                  proteinsamount={meal.proteinsamount}
+                  proteinfood={meal.proteinfood}
+                  carbohydratefood={meal.carbohydratefood}
+                  vegetablefood={meal.vegetablefood}
+                  date={meal.date}
+                  key={meal.id}
+                  id={meal.id}
+                  meal={meal.meal}
+                />
+              ))
+            }
+            {
               filtered.map((meal: MealProps) => (
                 <MealCard
                   vegetablesamount={meal.vegetablesamount}
@@ -154,6 +182,16 @@ export function User() {
                   meal={meal.meal}
                 />
               ))
+            }
+            {
+              isFiltered === true && filtered.length === 0
+              && (
+              <strong>
+                Infelizmente não encontramos nada para você...
+                {' '}
+                <HiOutlineEmojiSad className="icon" />
+              </strong>
+              )
             }
           </MealsContainer>
         </SectionContent>

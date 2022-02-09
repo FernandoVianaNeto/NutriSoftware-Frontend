@@ -31,6 +31,18 @@ export const MealsContainer = styled.div`
     background-color:  ${theme.colors.fourthColor};
     border-radius: 20px;
     min-height: 270px;
+
+    strong {
+      color: ${theme.colors.fifthColor};
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+
+      .icon {
+        font-size: 20px;
+      }
+    }
   `}
 `;
 
