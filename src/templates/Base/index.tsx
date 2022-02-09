@@ -26,7 +26,7 @@ export function Base({ children, meals = false, createmeal = false }: BaseProps)
             <GiMeal />
             Refeições
           </ButtonLink>
-          <ButtonLink selected={createmeal} href={`/user/${id}`}>
+          <ButtonLink selected={createmeal} href={`/user/criarrefeicao/${id}`}>
             <AiOutlinePlus />
             Criar refeição
           </ButtonLink>

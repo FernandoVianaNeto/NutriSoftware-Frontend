@@ -28,10 +28,8 @@ interface MealProps {
 
 export function User() {
   const [mealsData, setMealsData] = useState([]);
-
   const [recentMeals, setRecentMeals] = useState(true);
   const [isFiltered, setIsFiltered] = useState(false);
-
   const [vegetablesFilter, setVegetablesFilter] = useState('');
   const [proteinsFilter, setProteinsFilter] = useState('');
   const [carbohydratesFilter, setCarbohydratesFilter] = useState('');
