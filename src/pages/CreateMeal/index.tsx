@@ -14,13 +14,13 @@ import urlConfig from '../../urlConfig.json';
 
 export function CreateMeal() {
   const [date, setDate] = useState('');
-  const [proteinfood, setProteinFood] = useState('');
-  const [carbohydratefood, setCarboHydrateFood] = useState('');
-  const [vegetablefood, setVegetableFood] = useState('');
+  const [proteinfood, setProteinFood] = useState('-');
+  const [carbohydratefood, setCarboHydrateFood] = useState('-');
+  const [vegetablefood, setVegetableFood] = useState('-');
   const [meal, setMeal] = useState('');
-  const [proteinamount, setProteinAmount] = useState('');
-  const [carbohydrateamount, setCarbohydrateAmount] = useState('');
-  const [vegetableamount, setVegetableAmount] = useState('');
+  const [proteinamount, setProteinAmount] = useState('0');
+  const [carbohydrateamount, setCarbohydrateAmount] = useState('0');
+  const [vegetableamount, setVegetableAmount] = useState('0');
   const [buttonDisabled, setButtonDisabled] = useState(true);
 
   const { id } = useParams();
@@ -53,9 +53,9 @@ export function CreateMeal() {
       carbohydratefood,
       vegetablefood,
       meal,
-      proteinamount: Number(proteinamount),
-      carbohydrateamount: Number(carbohydrateamount),
-      vegetableamount: Number(vegetableamount),
+      proteinsamount: Number(proteinamount),
+      carbohydratesamount: Number(carbohydrateamount),
+      vegetablesamount: Number(vegetableamount),
     })
       .then(() => {
         window.location.href = `${urlConfig.frontendURL}/user/${id}`;
