@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import { Button } from '../../components/Button';
 import { Form } from '../../components/Form';
 import { InputForm } from '../../components/InputForm';
@@ -8,7 +9,59 @@ import {
   Container, SectionContent, FormContainer, Group, BigGroup, ButtonContainer,
 } from './styles';
 
+import api from '../../api/api';
+import urlConfig from '../../urlConfig.json';
+
 export function CreateMeal() {
+  const [date, setDate] = useState('');
+  const [proteinfood, setProteinFood] = useState('');
+  const [carbohydratefood, setCarboHydrateFood] = useState('');
+  const [vegetablefood, setVegetableFood] = useState('');
+  const [meal, setMeal] = useState('');
+  const [proteinamount, setProteinAmount] = useState('');
+  const [carbohydrateamount, setCarbohydrateAmount] = useState('');
+  const [vegetableamount, setVegetableAmount] = useState('');
+  const [buttonDisabled, setButtonDisabled] = useState(true);
+
+  const { id } = useParams();
+
+  useEffect(() => {
+    const authToken: any = localStorage.getItem('token');
+
+    if (!authToken) {
+      window.location.href = `${urlConfig.frontendURL}/`;
+    }
+
+    api.defaults.headers.authorization = `Bearer ${JSON.parse(authToken)}`;
+  }, []);
+
+  useEffect(() => {
+    if (date !== '' && meal !== '') {
+      if ((proteinfood !== '' && proteinamount !== '') || (vegetablefood !== '' && vegetableamount !== '') || (carbohydratefood !== '' && carbohydrateamount !== '')) {
+        setButtonDisabled(false);
+      } else {
+        setButtonDisabled(true);
+      }
+    }
+  }, [date, proteinfood, carbohydratefood, vegetablefood,
+    meal, proteinamount, carbohydrateamount, vegetableamount]);
+
+  function handleCreateMeal() {
+    api.post(`/createmeal/${id}`, {
+      date,
+      proteinfood,
+      carbohydratefood,
+      vegetablefood,
+      meal,
+      proteinamount: Number(proteinamount),
+      carbohydrateamount: Number(carbohydrateamount),
+      vegetableamount: Number(vegetableamount),
+    })
+      .then(() => {
+        window.location.href = `${urlConfig.frontendURL}/user/${id}`;
+      });
+  }
+
   return (
     <Container>
       <Base meals={false} createmeal>
@@ -21,11 +74,16 @@ export function CreateMeal() {
                   <small>Data</small>
                   <InputForm
                     type="date"
+                    value={date}
+                    onChange={(event) => setDate(event.target.value)}
                   />
                 </Group>
                 <Group>
                   <small>Refeição</small>
-                  <SelectForm>
+                  <SelectForm
+                    value={meal}
+                    onChange={(event) => setMeal(event.target.value)}
+                  >
                     <option value="">Refeição</option>
                     <option value="cafe da manha">Café da manha</option>
                     <option value="almoco">Almoço</option>
@@ -36,7 +94,10 @@ export function CreateMeal() {
               <BigGroup>
                 <Group>
                   <small>Proteína:</small>
-                  <SelectForm>
+                  <SelectForm
+                    value={proteinfood}
+                    onChange={(event) => setProteinFood(event.target.value)}
+                  >
                     <option value="">Proteína</option>
                     <option value="peixe">Peixe</option>
                     <option value="boi">Boi</option>
@@ -49,16 +110,22 @@ export function CreateMeal() {
                   <small>Quantidade (g)</small>
                   <InputForm
                     placeholder="g"
+                    type="number"
+                    value={proteinamount}
+                    onChange={(event) => setProteinAmount(event.target.value)}
                   />
                 </Group>
               </BigGroup>
               <BigGroup>
                 <Group>
                   <small>Carboidratos:</small>
-                  <SelectForm>
+                  <SelectForm
+                    value={carbohydratefood}
+                    onChange={(event) => setCarboHydrateFood(event.target.value)}
+                  >
                     <option value="">Carboidrato</option>
                     <option value="arroz">Arroz</option>
-                    <option value="batata">Bata</option>
+                    <option value="batata">Batata</option>
                     <option value="inhame">Inhame</option>
                     <option value="macarrao">Macarrão</option>
                     <option value="pao">Pão</option>
@@ -68,13 +135,18 @@ export function CreateMeal() {
                   <small>Quantidade (g)</small>
                   <InputForm
                     placeholder="g"
+                    value={carbohydrateamount}
+                    onChange={(event) => setCarbohydrateAmount(event.target.value)}
                   />
                 </Group>
               </BigGroup>
               <BigGroup>
                 <Group>
                   <small>Vegetais:</small>
-                  <SelectForm>
+                  <SelectForm
+                    value={vegetablefood}
+                    onChange={(event) => setVegetableFood(event.target.value)}
+                  >
                     <option value="">Vegetal</option>
                     <option value="abobrinha">Abobrinha</option>
                     <option value="berinjela">Berinjela</option>
@@ -87,14 +159,15 @@ export function CreateMeal() {
                   <small>Quantidade (g)</small>
                   <InputForm
                     placeholder="g"
+                    value={vegetableamount}
+                    onChange={(event) => setVegetableAmount(event.target.value)}
                   />
                 </Group>
               </BigGroup>
             </Form>
             <ButtonContainer>
-              <Button type="button">Cadastrar refeição</Button>
+              <Button type="button" disabled={buttonDisabled} onClick={() => handleCreateMeal()}>Cadastrar refeição</Button>
             </ButtonContainer>
-
           </FormContainer>
         </SectionContent>
       </Base>
