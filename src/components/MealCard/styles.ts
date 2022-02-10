@@ -34,6 +34,14 @@ export const Container = styled.div`
         color: green;
       }
 
+      a {
+        background-color: transparent;
+        border: none;
+        font-size: 20px;
+        cursor: pointer;
+        color: green;
+      }
+
       .delete-button {
         color: red;
         

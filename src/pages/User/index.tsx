@@ -24,7 +24,8 @@ interface MealProps {
   vegetablefood: string,
   meal: string,
   date: string,
-  id: string
+  id: string,
+  reference: string
 }
 
 export function User() {
@@ -175,6 +176,7 @@ export function User() {
                   key={meal.id}
                   id={meal.id}
                   meal={meal.meal}
+                  reference={meal.reference}
                 />
               ))
             }
@@ -191,6 +193,7 @@ export function User() {
                   key={meal.id}
                   id={meal.id}
                   meal={meal.meal}
+                  reference={meal.reference}
                 />
               ))
             }

@@ -4,6 +4,7 @@ import { AiFillDelete, AiFillEdit } from 'react-icons/ai';
 import { Container } from './styles';
 
 import api from '../../api/api';
+import urlConfig from '../../urlConfig.json';
 
 interface MealCardProps {
   vegetablesamount: number,
@@ -15,11 +16,12 @@ interface MealCardProps {
   meal: string,
   date: string,
   id: string,
+  reference: string,
 }
 
 export function MealCard({
   vegetablesamount, proteinsamount, carbohydratesamount,
-  carbohydratefood, proteinfood, vegetablefood, meal, date, id,
+  carbohydratefood, proteinfood, vegetablefood, meal, date, id, reference,
 }: MealCardProps) {
   function handleDeleteMeal() {
     if ((window.confirm('Are you sure you want to delete this meal?'))) {
@@ -57,9 +59,9 @@ export function MealCard({
                 {' '}
                 <AiFillDelete />
               </button>
-              <button type="button">
+              <a href={`${urlConfig.frontendURL}/user/editarrefeicao/${id}/${reference}`}>
                 <AiFillEdit />
-              </button>
+              </a>
             </td>
           </tr>
         </tbody>
