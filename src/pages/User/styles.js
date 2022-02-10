@@ -11,9 +11,6 @@ export const SectionContent = styled.div`
     padding: 50px;
 
     h1 {
-      background-color: ${theme.colors.fourthColor};
-      padding: 20px 20px;
-      border-radius: 20px;
       color: ${theme.colors.fifthColor};
     }
 
@@ -122,5 +119,37 @@ export const Group = styled.div`
     display: flex;
     align-items: center;
     gap: 10px;
+  `}
+`;
+
+export const Header = styled.header`
+  ${({ theme }) => css`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+
+    background-color: ${theme.colors.fourthColor};
+    padding: 20px 20px;
+    border-radius: 20px;
+
+    h3 {
+      color: ${theme.colors.fifthColor};
+      span {
+        color: ${theme.colors.secondaryColor};
+      }
+    }
+  `}
+`;
+
+export const MacrosContainer = styled.header`
+  ${({ theme }) => css`
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    background-color: ${theme.colors.fourthColor};
+    padding: 20px 20px;
+    border-radius: 20px;
   `}
 `;

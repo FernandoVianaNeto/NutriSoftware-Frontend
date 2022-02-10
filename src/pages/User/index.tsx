@@ -5,6 +5,7 @@ import { AiOutlinePlus } from 'react-icons/ai';
 import { HiOutlineEmojiSad } from 'react-icons/hi';
 import {
   Container, SectionContent, MealsContainer, Filters, FiltersButtonContainer,
+  Header, MacrosContainer,
 } from './styles';
 
 import { Base } from '../../templates/Base';
@@ -36,8 +37,11 @@ export function User() {
   const [proteinsFilter, setProteinsFilter] = useState('');
   const [carbohydratesFilter, setCarbohydratesFilter] = useState('');
   const [mealFilter, setMealFilter] = useState('');
-  console.log(mealsData);
   const { id } = useParams();
+
+  const [totalProteins, setTotalProteins] = useState(0);
+  const [totalVegetables, setTotalVegetables] = useState(0);
+  const [totalCarbohydrates, settotalCarbohydrates] = useState(0);
 
   useEffect(() => {
     const authToken: any = localStorage.getItem('token');
@@ -53,6 +57,24 @@ export function User() {
         setMealsData(response.data);
       });
   }, []);
+
+  useEffect(() => {
+    let proteins = 0;
+    let vegetables = 0;
+    let carbohydrates = 0;
+
+    mealsData.map((meal: MealProps) => {
+      proteins += meal.proteinsamount;
+      vegetables += meal.vegetablesamount;
+      carbohydrates += meal.carbohydratesamount;
+
+      return { proteins, vegetables, carbohydrates };
+    });
+
+    setTotalProteins(proteins);
+    setTotalVegetables(vegetables);
+    settotalCarbohydrates(carbohydrates);
+  }, [mealsData]);
 
   useEffect(() => {
     if (vegetablesFilter === '' && proteinsFilter === '' && carbohydratesFilter === '') {
@@ -73,7 +95,35 @@ export function User() {
     <Container>
       <Base meals createmeal={false}>
         <SectionContent>
-          <h1>Todas as Refeições</h1>
+          <Header>
+            <h1>Todas as Refeições</h1>
+            <MacrosContainer>
+              <h3>
+                Proteínas:
+                {' '}
+                <span>
+                  {totalProteins}
+                  g
+                </span>
+              </h3>
+              <h3>
+                Vegetais:
+                {' '}
+                <span>
+                  {totalVegetables}
+                  g
+                </span>
+              </h3>
+              <h3>
+                Carboidratos:
+                {' '}
+                <span>
+                  {totalCarbohydrates}
+                  g
+                </span>
+              </h3>
+            </MacrosContainer>
+          </Header>
           <Filters>
             <FiltersButtonContainer>
               <table>

@@ -15,17 +15,13 @@ import urlConfig from '../../urlConfig.json';
 export function CreateMeal() {
   const [date, setDate] = useState('');
   const [proteinfood, setProteinFood] = useState('-');
-  const [carbohydratefood, setCarboHydrateFood] = useState('-');
+  const [carbohydratefood, setCarbohydrateFood] = useState('-');
   const [vegetablefood, setVegetableFood] = useState('-');
   const [meal, setMeal] = useState('');
   const [proteinamount, setProteinAmount] = useState('0');
   const [carbohydrateamount, setCarbohydrateAmount] = useState('0');
   const [vegetableamount, setVegetableAmount] = useState('0');
   const [buttonDisabled, setButtonDisabled] = useState(true);
-  const [selectMeal, setSelectMeal]: any = useState(false);
-  const [selectCarbohydrate, setSelecCarbohydrate]: any = useState(false);
-  const [selectProtein, setSelectProtein]: any = useState(false);
-  const [selectVegetable, setSelectVegetable]: any = useState(false);
 
   const { id } = useParams();
 
@@ -66,26 +62,6 @@ export function CreateMeal() {
       });
   }
 
-  function handleFilterCarbohydrated(event: any) {
-    setSelecCarbohydrate(true);
-    setCarboHydrateFood(event.target.value);
-  }
-
-  function handleFilterProtein(event: any) {
-    setSelectProtein(true);
-    setProteinFood(event.target.value);
-  }
-
-  function handleFilterVegetable(event: any) {
-    setSelectVegetable(true);
-    setVegetableFood(event.target.value);
-  }
-
-  function handleFilterMeal(event: any) {
-    setSelectMeal(true);
-    setMeal(event.target.value);
-  }
-
   return (
     <Container>
       <Base meals={false} createmeal>
@@ -106,8 +82,7 @@ export function CreateMeal() {
                   <small>Refeição</small>
                   <SelectForm
                     value={meal}
-                    onChange={(event) => handleFilterMeal(event)}
-                    selected={selectMeal}
+                    onChange={(event) => setMeal(event.target.value)}
                   >
                     <option value="">Refeição</option>
                     <option value="Café da manhã">Café da manha</option>
@@ -121,8 +96,7 @@ export function CreateMeal() {
                   <small>Proteína:</small>
                   <SelectForm
                     value={proteinfood}
-                    onChange={(event) => handleFilterProtein(event)}
-                    selected={selectProtein}
+                    onChange={(event) => setProteinFood(event.target.value)}
                   >
                     <option value="">Proteína</option>
                     <option value="Peixe">Peixe</option>
@@ -147,8 +121,7 @@ export function CreateMeal() {
                   <small>Carboidratos:</small>
                   <SelectForm
                     value={carbohydratefood}
-                    onChange={(event) => handleFilterCarbohydrated(event)}
-                    selected={selectCarbohydrate}
+                    onChange={(event) => setCarbohydrateFood(event.target.value)}
                   >
                     <option value="">Carboidrato</option>
                     <option value="Arroz">Arroz</option>
@@ -172,8 +145,7 @@ export function CreateMeal() {
                   <small>Vegetais:</small>
                   <SelectForm
                     value={vegetablefood}
-                    onChange={(event) => handleFilterVegetable(event.target.value)}
-                    selected={selectVegetable}
+                    onChange={(event) => setVegetableFood(event.target.value)}
                   >
                     <option value="">Vegetal</option>
                     <option value="Abobrinha">Abobrinha</option>
