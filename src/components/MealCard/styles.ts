@@ -7,6 +7,7 @@ export const Container = styled.div`
     padding: 20px;
     border-radius: 20px;
     box-shadow: 0 0 2em lightgray;
+    color: gray;
 
     tr {
       display: flex;

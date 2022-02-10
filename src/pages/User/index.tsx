@@ -36,7 +36,7 @@ export function User() {
   const [proteinsFilter, setProteinsFilter] = useState('');
   const [carbohydratesFilter, setCarbohydratesFilter] = useState('');
   const [mealFilter, setMealFilter] = useState('');
-
+  console.log(mealsData);
   const { id } = useParams();
 
   useEffect(() => {

@@ -16,6 +16,9 @@ export const SectionContent = styled.div`
       border-radius: 20px;
       color: ${theme.colors.fifthColor};
     }
+
+    max-width: 1000px;
+    margin: 0 auto;
   `}
 `;
 

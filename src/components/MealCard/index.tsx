@@ -59,7 +59,7 @@ export function MealCard({
                 {' '}
                 <AiFillDelete />
               </button>
-              <a href={`${urlConfig.frontendURL}/user/editarrefeicao/${id}/${reference}`}>
+              <a href={`${urlConfig.frontendURL}/user/editarrefeicao/${reference}/${id}`}>
                 <AiFillEdit />
               </a>
             </td>
