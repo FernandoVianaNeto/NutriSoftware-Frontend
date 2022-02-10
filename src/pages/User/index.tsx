@@ -154,7 +154,7 @@ export function User() {
               <strong className="no-meal">
                 Cadastre uma nova refeição para mostrá-la aqui
                 {' '}
-                <a href={`${urlConfig.frontendURL}/criarrefeicao/${id}`}>
+                <a href={`${urlConfig.frontendURL}/user/criarrefeicao/${id}`}>
                   <AiOutlinePlus />
                   Criar refeição
                 </a>
