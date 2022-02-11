@@ -1,11 +1,11 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
-import { BsFillGearFill, BsArrowDownShort, BsArrowUpShort } from 'react-icons/bs';
+import { BsFillGearFill } from 'react-icons/bs';
 import { AiOutlinePlus } from 'react-icons/ai';
 import { HiOutlineEmojiSad } from 'react-icons/hi';
 import {
   Container, SectionContent, MealsContainer, Filters, FiltersButtonContainer,
-  Header, MacrosContainer,
+  Header, MacrosContainer, DataSearch, Group,
 } from './styles';
 
 import { Base } from '../../templates/Base';
@@ -15,6 +15,7 @@ import urlConfig from '../../urlConfig.json';
 
 import { MealCard } from '../../components/MealCard';
 import { Select } from '../../components/Select';
+import { InputForm } from '../../components/InputForm';
 
 interface MealProps {
   vegetablesamount: number,
@@ -31,17 +32,18 @@ interface MealProps {
 
 export function User() {
   const [mealsData, setMealsData] = useState([]);
-  const [recentMeals, setRecentMeals] = useState(true);
   const [isFiltered, setIsFiltered] = useState(false);
+  const [isDataFiltered, setIsDataFiltered] = useState(false);
   const [vegetablesFilter, setVegetablesFilter] = useState('');
   const [proteinsFilter, setProteinsFilter] = useState('');
   const [carbohydratesFilter, setCarbohydratesFilter] = useState('');
   const [mealFilter, setMealFilter] = useState('');
-  const { id } = useParams();
-
   const [totalProteins, setTotalProteins] = useState(0);
   const [totalVegetables, setTotalVegetables] = useState(0);
   const [totalCarbohydrates, settotalCarbohydrates] = useState(0);
+  const [initialDate, setInitialDate] = useState('');
+  const [finalDate, setFinalDate] = useState('');
+  const { id } = useParams();
 
   useEffect(() => {
     const authToken: any = localStorage.getItem('token');
@@ -84,12 +86,37 @@ export function User() {
     }
   }, [mealFilter, carbohydratesFilter, vegetablesFilter, proteinsFilter]);
 
-  const filtered = useMemo(() => mealsData.filter((meal: MealProps) => (
+  useEffect(() => {
+    if (initialDate !== '' && finalDate !== '') {
+      setIsDataFiltered(true);
+    }
+  }, [initialDate, finalDate]);
+
+  function converteData(DataDDMMYY: any) {
+    const dataSplit = DataDDMMYY.split('/');
+    const novaData = new Date(
+      parseInt(dataSplit[2], 10),
+      parseInt(dataSplit[1], 10) - 1,
+      parseInt(dataSplit[0], 10),
+    );
+    return novaData;
+  }
+
+  const filtered = useMemo(() => mealsData.filter(async (meal: MealProps) => (
     meal.carbohydratefood.toLowerCase().includes(carbohydratesFilter.toLowerCase())
     && meal.proteinfood.toLowerCase().includes(proteinsFilter.toLowerCase())
     && meal.vegetablefood.toLowerCase().includes(vegetablesFilter.toLowerCase())
     && meal.meal.toLowerCase().includes(mealFilter.toLowerCase())
   )), [carbohydratesFilter, proteinsFilter, vegetablesFilter, mealFilter]);
+
+  const filteredPeriod = useMemo(() => mealsData.filter((meal: MealProps) => (
+    (converteData(meal.date) >= converteData(initialDate.split('-').reverse().join('/')))
+    && (converteData(meal.date) <= converteData(finalDate.split('-').reverse().join('/')))
+    && meal.carbohydratefood.toLowerCase().includes(carbohydratesFilter.toLowerCase())
+    && meal.proteinfood.toLowerCase().includes(proteinsFilter.toLowerCase())
+    && meal.vegetablefood.toLowerCase().includes(vegetablesFilter.toLowerCase())
+    && meal.meal.toLowerCase().includes(mealFilter.toLowerCase())
+  )), [initialDate, finalDate, proteinsFilter, vegetablesFilter, mealFilter, carbohydratesFilter]);
 
   return (
     <Container>
@@ -141,12 +168,7 @@ export function User() {
                       </Select>
                     </td>
                     <td>
-                      {
-                        recentMeals ? <BsArrowUpShort className="icon" /> : <BsArrowDownShort className="icon" />
-                      }
-                      <button type="button" onClick={() => setRecentMeals(!recentMeals)}>
-                        Data
-                      </button>
+                      Data
                     </td>
                     <td>
                       <Select
@@ -161,7 +183,7 @@ export function User() {
                         <option value="ovo">Ovo</option>
                       </Select>
                     </td>
-                    <td><button type="button">Qntd.</button></td>
+                    <td>Qntd.</td>
                     <td>
                       <Select
                         value={carbohydratesFilter}
@@ -175,7 +197,7 @@ export function User() {
                         <option value="pão">Pão</option>
                       </Select>
                     </td>
-                    <td><button type="button">Qntd.</button></td>
+                    <td>Qntd.</td>
                     <td>
                       <Select
                         value={vegetablesFilter}
@@ -189,7 +211,7 @@ export function User() {
                         <option value="tomate">Tomate</option>
                       </Select>
                     </td>
-                    <td><button type="button">Qntd.</button></td>
+                    <td>Qntd.</td>
                     <td className="options">
                       {' '}
                       <BsFillGearFill />
@@ -213,7 +235,7 @@ export function User() {
               )
             }
             {
-              filtered.length === 0 && isFiltered === false
+              filtered.length === 0 && !isFiltered && !isDataFiltered
               && mealsData.map((meal: MealProps) => (
                 <MealCard
                   vegetablesamount={meal.vegetablesamount}
@@ -231,7 +253,8 @@ export function User() {
               ))
             }
             {
-              filtered.map((meal: MealProps) => (
+              !isDataFiltered
+              && filtered.map((meal: MealProps) => (
                 <MealCard
                   vegetablesamount={meal.vegetablesamount}
                   carbohydratesamount={meal.carbohydratesamount}
@@ -257,7 +280,55 @@ export function User() {
               </strong>
               )
             }
+            {
+              filteredPeriod.length === 0
+              && (
+              <strong>
+                Infelizmente não encontramos nada para você...
+                {' '}
+                <HiOutlineEmojiSad className="icon" />
+              </strong>
+              )
+            }
+            {
+              isDataFiltered
+              && filteredPeriod.map((meal: MealProps) => (
+                <MealCard
+                  vegetablesamount={meal.vegetablesamount}
+                  carbohydratesamount={meal.carbohydratesamount}
+                  proteinsamount={meal.proteinsamount}
+                  proteinfood={meal.proteinfood}
+                  carbohydratefood={meal.carbohydratefood}
+                  vegetablefood={meal.vegetablefood}
+                  date={meal.date}
+                  key={meal.id}
+                  id={meal.id}
+                  meal={meal.meal}
+                  reference={meal.reference}
+                />
+              ))
+            }
           </MealsContainer>
+          <DataSearch>
+            <h3>
+              Período pesquisado:
+              {' '}
+              <span>{!isDataFiltered ? 'todos' : `${initialDate.split('-').reverse().join('/')} até ${finalDate.split('-').reverse().join('/')} `}</span>
+            </h3>
+            <Group>
+              <InputForm
+                type="date"
+                value={initialDate}
+                onChange={(event) => setInitialDate(event.target.value)}
+              />
+              <small>até</small>
+              <InputForm
+                type="date"
+                value={finalDate}
+                onChange={(event) => setFinalDate(event.target.value)}
+              />
+            </Group>
+          </DataSearch>
         </SectionContent>
       </Base>
     </Container>

@@ -103,6 +103,7 @@ export const FiltersButtonContainer = styled.div`
     td {
       text-align: center;
       width: 100px;
+      font-size: 14px;
     }
 
     .options {
@@ -151,5 +152,26 @@ export const MacrosContainer = styled.header`
     background-color: ${theme.colors.fourthColor};
     padding: 20px 20px;
     border-radius: 20px;
+  `}
+`;
+
+export const DataSearch = styled.div`
+  ${({ theme }) => css`
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    background-color: ${theme.colors.fourthColor};
+    padding: 20px 20px;
+    border-radius: 20px;
+
+    h3 {
+      color: ${theme.colors.fifthColor};
+
+      span {
+        color: ${theme.colors.thirdColor};
+      }
+    }
   `}
 `;

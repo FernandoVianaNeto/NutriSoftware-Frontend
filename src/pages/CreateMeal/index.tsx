@@ -14,6 +14,7 @@ import urlConfig from '../../urlConfig.json';
 
 export function CreateMeal() {
   const [date, setDate] = useState('');
+  const [brazilianDate, setBrazilianDate] = useState('');
   const [proteinfood, setProteinFood] = useState('-');
   const [carbohydratefood, setCarbohydrateFood] = useState('-');
   const [vegetablefood, setVegetableFood] = useState('-');
@@ -36,19 +37,19 @@ export function CreateMeal() {
   }, []);
 
   useEffect(() => {
-    if (date !== '' && meal !== '') {
+    if (brazilianDate !== '' && meal !== '') {
       if ((proteinfood !== '' && proteinamount !== '') || (vegetablefood !== '' && vegetableamount !== '') || (carbohydratefood !== '' && carbohydrateamount !== '')) {
         setButtonDisabled(false);
       } else {
         setButtonDisabled(true);
       }
     }
-  }, [date, proteinfood, carbohydratefood, vegetablefood,
+  }, [brazilianDate, proteinfood, carbohydratefood, vegetablefood,
     meal, proteinamount, carbohydrateamount, vegetableamount]);
 
   function handleCreateMeal() {
     api.post(`/createmeal/${id}`, {
-      date,
+      date: brazilianDate,
       proteinfood,
       carbohydratefood,
       vegetablefood,
@@ -61,6 +62,10 @@ export function CreateMeal() {
         window.location.href = `${urlConfig.frontendURL}/user/${id}`;
       });
   }
+
+  useEffect(() => {
+    setBrazilianDate(date.split('-').reverse().join('/'));
+  }, [date]);
 
   return (
     <Container>
