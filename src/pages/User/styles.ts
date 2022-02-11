@@ -16,6 +16,11 @@ export const SectionContent = styled.div`
 
     max-width: 1000px;
     margin: 0 auto;
+
+    @media ${theme.media.lteMedium} {
+      max-width: 100vw;
+      padding: 50px 0px;
+    }
   `}
 `;
 
@@ -116,10 +121,14 @@ export const FiltersButtonContainer = styled.div`
 `;
 
 export const Group = styled.div`
-  ${() => css`
+  ${({ theme }: any) => css`
     display: flex;
     align-items: center;
     gap: 10px;
+
+    @media ${theme.media.lteMedium} {
+      flex-direction: column;
+    }
   `}
 `;
 
@@ -140,6 +149,13 @@ export const Header = styled.header`
         color: ${theme.colors.secondaryColor};
       }
     }
+
+    @media ${theme.media.lteMedium} {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
   `}
 `;
 
@@ -152,6 +168,10 @@ export const MacrosContainer = styled.header`
     background-color: ${theme.colors.fourthColor};
     padding: 20px 20px;
     border-radius: 20px;
+
+    @media ${theme.media.lteMedium} {
+      flex-direction: column;
+    }
   `}
 `;
 
@@ -171,6 +191,17 @@ export const DataSearch = styled.div`
 
       span {
         color: ${theme.colors.thirdColor};
+      }
+    }
+
+    @media ${theme.media.lteMedium} {
+      flex-direction: column;
+      gap: 10px;
+
+      h3 {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
       }
     }
   `}
