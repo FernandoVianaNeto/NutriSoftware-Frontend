@@ -22,6 +22,7 @@ export default function Login() {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [registerPassword, setRegisterPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [registerEmail, setRegisterEmail] = useState('');
   const [buttonDisabled, setButtonDisabled] = useState(true);
   const [buttonRegisterDisabled, setButtonRegisterDisabled] = useState(true);
@@ -39,12 +40,12 @@ export default function Login() {
   }, [email, password]);
 
   useEffect(() => {
-    if (isEmailValid(registerEmail) && registerPassword !== '' && name !== '' && phone !== '') {
+    if (isEmailValid(registerEmail) && registerPassword !== '' && name !== '' && phone !== '' && confirmPassword !== '' && registerPassword === confirmPassword) {
       setButtonRegisterDisabled(false);
     } else {
       setButtonRegisterDisabled(true);
     }
-  }, [registerEmail, registerPassword, name, phone]);
+  }, [registerEmail, registerPassword, name, phone, confirmPassword]);
 
   return (
     <Container>
@@ -122,6 +123,15 @@ export default function Login() {
                   type="password"
                   value={registerPassword}
                   onChange={(event) => setRegisterPassword(event.target.value)}
+                />
+              </InputContainer>
+              <InputContainer>
+                <RiLockPasswordFill />
+                <Input
+                  placeholder="Confirme a senha"
+                  type="password"
+                  value={confirmPassword}
+                  onChange={(event) => setConfirmPassword(event.target.value)}
                 />
               </InputContainer>
               {
