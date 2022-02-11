@@ -9,7 +9,7 @@ export const Container = styled.div`
 `;
 
 export const Aside = styled.aside`
-  ${({ theme }) => css`  
+  ${({ theme }: any) => css`  
     flex: 2;
     background-color: ${theme.colors.fifthColor};
     display: flex;
@@ -56,7 +56,7 @@ export const InputContainer = styled.div`
 `;
 
 export const FormContainer = styled.div`
-  ${({ theme }) => css`
+  ${({ theme }: any) => css`
     display: flex;
     flex-direction: column;
     gap: 50px;
@@ -67,7 +67,7 @@ export const FormContainer = styled.div`
 `;
 
 export const SectionContent = styled.div`
-  ${({ theme }) => css`
+  ${({ theme }: any) => css`
     height: 100vh;
     display: flex;
     flex-direction: column;

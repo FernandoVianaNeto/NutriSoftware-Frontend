@@ -7,7 +7,7 @@ export const Container = styled.div`
 `;
 
 export const SectionContent = styled.div`
-  ${({ theme }) => css`
+  ${({ theme }: any) => css`
     padding: 50px;
 
     h1 {
@@ -22,7 +22,7 @@ export const SectionContent = styled.div`
 // Componentes
 
 export const MealsContainer = styled.div`
-  ${({ theme }) => css`
+  ${({ theme }: any) => css`
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -66,7 +66,7 @@ export const MealsContainer = styled.div`
 `;
 
 export const Filters = styled.div`
-  ${({ theme }) => css`
+  ${({ theme }: any) => css`
     display: flex;
     justify-content: space-between;
 
@@ -80,7 +80,7 @@ export const Filters = styled.div`
 `;
 
 export const FiltersButtonContainer = styled.div`
-  ${({ theme }) => css`
+  ${({ theme }: any) => css`
     border-radius: 20px;
     background-color: ${theme.colors.fourthColor};
     width: 100%;
@@ -124,7 +124,7 @@ export const Group = styled.div`
 `;
 
 export const Header = styled.header`
-  ${({ theme }) => css`
+  ${({ theme }: any) => css`
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -144,7 +144,7 @@ export const Header = styled.header`
 `;
 
 export const MacrosContainer = styled.header`
-  ${({ theme }) => css`
+  ${({ theme }: any) => css`
     display: flex;
     align-items: center;
     gap: 10px;
@@ -156,7 +156,7 @@ export const MacrosContainer = styled.header`
 `;
 
 export const DataSearch = styled.div`
-  ${({ theme }) => css`
+  ${({ theme }: any) => css`
     margin-top: 20px;
     display: flex;
     align-items: center;
