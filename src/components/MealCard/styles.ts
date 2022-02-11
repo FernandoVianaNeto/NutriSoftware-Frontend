@@ -49,12 +49,20 @@ export const Container = styled.div`
     }
 
     @media ${theme.media.lteMedium} {
+      table {
+        width: 100%;
+      }
+
       tr {
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
 
+        td {
+          width: 100%;
+          font-size: 20px;
+        }
       }
     }
   `}
