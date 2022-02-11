@@ -45,7 +45,16 @@ export const Container = styled.div`
 
       .delete-button {
         color: red;
-        
+      }
+    }
+
+    @media ${theme.media.lteMedium} {
+      tr {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
       }
     }
   `}

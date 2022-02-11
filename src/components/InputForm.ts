@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 
 export const InputForm = styled.input`
-  ${({ theme }) => css`
+  ${({ theme }: any) => css`
   padding: 5px 10px;
   border: 2px solid ${theme.colors.fifthColor};
   border-top-right-radius: 16px;

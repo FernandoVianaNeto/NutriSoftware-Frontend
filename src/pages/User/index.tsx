@@ -281,7 +281,7 @@ export function User() {
               )
             }
             {
-              filteredPeriod.length === 0
+              filteredPeriod.length === 0 && isDataFiltered
               && (
               <strong>
                 Infelizmente não encontramos nada para você...

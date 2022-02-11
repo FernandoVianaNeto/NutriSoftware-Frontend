@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 
 export const Button = styled.button`
-  ${({ theme }) => css`
+  ${({ theme }:any) => css`
     display: flex;
     align-items: center;
     gap: 10px;
