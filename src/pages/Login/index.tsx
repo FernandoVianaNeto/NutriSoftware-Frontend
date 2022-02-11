@@ -20,10 +20,10 @@ export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
+  const [registerEmail, setRegisterEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [registerPassword, setRegisterPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [registerEmail, setRegisterEmail] = useState('');
   const [buttonDisabled, setButtonDisabled] = useState(true);
   const [buttonRegisterDisabled, setButtonRegisterDisabled] = useState(true);
   const [passwordError, setPasswordError] = useState(false);
