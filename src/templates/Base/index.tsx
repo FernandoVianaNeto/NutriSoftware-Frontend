@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { AiOutlineClose, AiOutlineMenu, AiOutlinePlus } from 'react-icons/ai';
 import { useParams } from 'react-router-dom';
 import { GiMeal } from 'react-icons/gi';
-import { AiOutlinePlus } from 'react-icons/ai';
+
 import {
   Container, Aside, Section, ButtonContainer,
 } from './styles';
@@ -15,11 +16,28 @@ interface BaseProps {
 }
 
 export function Base({ children, meals = false, createmeal = false }: BaseProps) {
+  const [showMenu, setShowMenu] = useState(false);
+
   const { id } = useParams();
 
   return (
     <Container>
-      <Aside>
+      {
+        showMenu ? (
+          <button className="close-button" type="button" onClick={() => setShowMenu(false)}>
+            <AiOutlineClose />
+            {' '}
+          </button>
+        )
+          : (
+            <button className="show-button" type="button" onClick={() => setShowMenu(true)}>
+              <AiOutlineMenu />
+              {' '}
+            </button>
+          )
+      }
+
+      <Aside showMenu={showMenu}>
         <h1>NutriSoftware</h1>
         <ButtonContainer>
           <ButtonLink selected={meals} href={`/user/${id}`}>

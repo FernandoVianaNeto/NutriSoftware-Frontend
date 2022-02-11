@@ -14,6 +14,6 @@ export default {
     contrastColorDarker: '#1481BA',
   },
   media: {
-    lteMedium: ('max-width: 768px'),
+    lteMedium: '(max-width: 768px)',
   },
 };
