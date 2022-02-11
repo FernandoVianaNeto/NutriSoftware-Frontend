@@ -26,6 +26,7 @@ export default function Login() {
   const [registerEmail, setRegisterEmail] = useState('');
   const [buttonDisabled, setButtonDisabled] = useState(true);
   const [buttonRegisterDisabled, setButtonRegisterDisabled] = useState(true);
+  const [passwordError, setPasswordError] = useState(false);
 
   const {
     handleLogin, unAuth, registedUser, handleRegisterUser,
@@ -38,6 +39,14 @@ export default function Login() {
       setButtonDisabled(true);
     }
   }, [email, password]);
+
+  useEffect(() => {
+    if (confirmPassword !== registerPassword) {
+      setPasswordError(true);
+    } else {
+      setPasswordError(false);
+    }
+  }, [registerPassword, confirmPassword]);
 
   useEffect(() => {
     if (isEmailValid(registerEmail) && registerPassword !== '' && name !== '' && phone !== '' && confirmPassword !== '' && registerPassword === confirmPassword) {
@@ -134,6 +143,9 @@ export default function Login() {
                   onChange={(event) => setConfirmPassword(event.target.value)}
                 />
               </InputContainer>
+              {
+                passwordError && <small>Senhas não conferem</small>
+              }
               {
                 registedUser && <small>Usuário já cadastrado</small>
               }
