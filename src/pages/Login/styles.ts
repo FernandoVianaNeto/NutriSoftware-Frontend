@@ -1,10 +1,16 @@
 import styled, { css } from 'styled-components';
 
 export const Container = styled.div`
-  ${() => css`
+  ${({ theme }: any) => css`
     display: flex;
     width: 100vw;
     height: 100vh;
+
+    @media ${theme.media.lteMedium} {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
   `}
 `;
 
@@ -30,13 +36,23 @@ export const Aside = styled.aside`
       font-family: ${theme.font.family.primaryFont};
     }
 
+    @media ${theme.media.lteMedium} {
+      padding: 50px 0px;
+      height: 100vh;
+      width: 100vw;
+      gap: 30px;
+    }
   `}
 `;
 
 export const Section = styled.section`
-  ${() => css`
+  ${({ theme }) => css`
     flex: 5;
-    
+
+    @media ${theme.media.lteMedium} {
+      height: 100vh;
+    }
+
   `}
 `;
 
