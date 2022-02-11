@@ -16,6 +16,11 @@ export const SectionContent = styled.div`
       border-radius: 20px;
       color: ${theme.colors.fifthColor};
     }
+
+    @media ${theme.media.lteMedium} {
+      max-width: 100vw;
+      padding: 50px 0px;
+    }
   `}
 `;
 
@@ -28,14 +33,24 @@ export const FormContainer = styled.div`
     margin: 100px auto;
     padding: 50px;
     border-radius: 20px;
+
+    @media ${theme.media.lteMedium} {
+      max-width: 100vw;
+      padding: 50px 0px;
+      flex-direction: column;
+    }
   `}
 `;
 
 export const BigGroup = styled.div`
-  ${() => css`
+  ${({ theme }: any) => css`
     display: flex;
     justify-content: space-around;
     gap: 30px;
+
+    @media ${theme.media.lteMedium} {
+      flex-direction: column;
+    }
   `}
 `;
 
