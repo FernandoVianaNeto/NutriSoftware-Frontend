@@ -30,8 +30,8 @@ export const FormContainer = styled.div`
   ${({ theme }) => css`
     background-color: ${theme.colors.fourthColor};
     width: 500px;
-    margin: 100px auto;
-    padding: 50px;
+    margin: 50px auto;
+    padding: 50px 100px;
     border-radius: 20px;
 
     @media ${theme.media.lteMedium} {
