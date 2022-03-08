@@ -222,6 +222,8 @@ export function User() {
             </FiltersButtonContainer>
           </Filters>
           <MealsContainer>
+            {/* <button onClick={() => setIsCreating(true)} type="button">Criar Refeição</button>
+            <CreateMealModal id={id} isCreating={isCreating} /> */}
             {
               mealsData.length === 0 && (
               <strong className="no-meal">

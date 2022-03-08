@@ -12,10 +12,12 @@ import { ButtonLink } from '../../components/ButtonLink';
 interface BaseProps {
   children: any,
   meals: boolean,
-  createmeal: boolean
+  createmeal: boolean,
 }
 
-export function Base({ children, meals = false, createmeal = false }: BaseProps) {
+export function Base({
+  children, meals = false, createmeal = false,
+}: BaseProps) {
   const [showMenu, setShowMenu] = useState(false);
 
   const { id } = useParams();
